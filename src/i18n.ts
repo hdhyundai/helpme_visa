@@ -353,7 +353,7 @@ export const i18nDict: Record<LangCode, Record<string, string>> = {
     'l_dorm_start': 'Ngày chuyển đến',
     's4_sub4': 'Thông tin khác', 
     'l_job': 'Nghề nghiệp của công nhân', 
-    'l_income': Thu nhập năm (Đơn vị: Vạn Won), 
+    'l_income': 'Thu nhập năm (Đơn vị: Vạn Won)', 
     'l_reentry': 'Thời gian tái nhập cảnh', 
     'l_refund': 'Tài khoản hoàn tiền',
     'btn_to_ai': 'Đến bước kiểm tra AI',
