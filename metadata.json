@@ -1,0 +1,6 @@
+{
+  "name": "helpme-visa",
+  "description": "Smart, AI-powered visa and immigration document generator for foreign employees at HD Hyundai Samho.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
