@@ -2147,8 +2147,8 @@ export default function App() {
                         type="text" 
                         value={formData.i_income}
                         onChange={(e) => handleFormChange('i_income', formatMoney(e.target.value))}
-                        placeholder="예: 3,200"
-                        className={`w-full bg-black/40 border border-white/10 text-white placeholder-slate-500 rounded-xl pl-4 pr-12 py-3 text-sm focus:outline-none focus:border-blue-500 font-mono text-right font-bold ${
+                        placeholder="3,200"
+                        className={`w-full bg-black/40 border border-white/10 text-white placeholder-slate-500 rounded-xl pl-4 pr-20 py-3 text-sm focus:outline-none focus:border-blue-500 font-mono text-right font-bold ${
                           errorHighlights.has('i_income') ? 'error-highlight' : ''
                         }`}
                       />
