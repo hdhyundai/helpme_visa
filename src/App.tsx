@@ -362,6 +362,68 @@ export default function App() {
     window.scrollTo(0,0);
   };
 
+  const handleClearStep = (stepNumber: number) => {
+    const defaultData = initialFormData;
+    if (stepNumber === 1) {
+      setFormData(prev => ({
+        ...prev,
+        reqType: defaultData.reqType,
+        visaType: defaultData.visaType,
+        val_change_status: defaultData.val_change_status,
+        submitter: defaultData.submitter
+      }));
+    } else if (stepNumber === 2) {
+      setFormData(prev => ({
+        ...prev,
+        i_surname: defaultData.i_surname,
+        i_givenname: defaultData.i_givenname,
+        i_dob: defaultData.i_dob,
+        i_gender: defaultData.i_gender,
+        i_nation: defaultData.i_nation,
+        i_arc: defaultData.i_arc,
+        i_passport: defaultData.i_passport,
+        i_pass_issue: defaultData.i_pass_issue,
+        i_pass_exp: defaultData.i_pass_exp,
+        i_spouse: defaultData.i_spouse,
+        i_parents: defaultData.i_parents,
+        i_address_kr: defaultData.i_address_kr,
+        i_cellphone: defaultData.i_cellphone,
+        i_phone: defaultData.i_phone,
+        i_address_home: defaultData.i_address_home,
+        i_home_phone: defaultData.i_home_phone,
+        i_email: defaultData.i_email
+      }));
+    } else if (stepNumber === 3) {
+      setFormData(prev => ({
+        ...prev,
+        i_cname: defaultData.i_cname,
+        i_cregno: defaultData.i_cregno,
+        i_rep_name: defaultData.i_rep_name,
+        i_rep_id: defaultData.i_rep_id,
+        i_rep_gender: defaultData.i_rep_gender,
+        i_caddr: defaultData.i_caddr,
+        i_cphone: defaultData.i_cphone,
+        i_new_cname: defaultData.i_new_cname,
+        i_new_cregno: defaultData.i_new_cregno,
+        i_new_cphone: defaultData.i_new_cphone
+      }));
+    } else if (stepNumber === 4) {
+      setFormData(prev => ({
+        ...prev,
+        r_own: defaultData.r_own,
+        r_type: defaultData.r_type,
+        i_dorm_start: defaultData.i_dorm_start,
+        i_job: defaultData.i_job,
+        i_income: defaultData.i_income,
+        i_reentry_period: defaultData.i_reentry_period,
+        i_refund_bank: defaultData.i_refund_bank,
+        i_refund_acc: defaultData.i_refund_acc,
+        i_guar_start: defaultData.i_guar_start,
+        i_guar_end: defaultData.i_guar_end
+      }));
+    }
+  };
+
   // Reset function
   const handleResetData = () => {
     showConfirm(
@@ -794,7 +856,21 @@ export default function App() {
       }
 
       setDownloadLinks(links);
-      showAlert('서류 일괄 완성 (Success)', '인쇄할 서류들이 로컬 메모리에 성공적으로 빌드 매핑되었습니다.\n각각의 다운로드 링크를 탭하십시오.', 'success');
+      showConfirm(
+        '서류 생성 완료 (Success)', 
+        '인쇄할 서류가 성공적으로 생성되었습니다. 아래 다운로드 링크를 통해 저장하세요.\n\n새로운 사람 등록을 위해 현재 입력된 데이터를 모두 초기화하시겠습니까?\n(확인을 누르면 데이터가 지워지지만 다운로드 링크는 유지됩니다.)',
+        () => {
+          setFormData(initialFormData);
+          try {
+            localStorage.removeItem('visaAutoSave');
+          } catch(e) {}
+          setErrorHighlights(new Set());
+          setAttachments([]);
+          setIssues([]);
+          setVerificationPassed(null);
+          showAlert('초기화 완료', '데이터가 초기화되었습니다. 다운로드 후 언제든 1단계로 돌아가 새 등록을 시작하세요.', 'success');
+        }
+      );
     } catch(e: any) {
       showAlert('완성 실패 (Failed)', e.message || '인쇄 배치 생성에 문제가 있습니다.', 'error');
     } finally {
@@ -1366,10 +1442,16 @@ export default function App() {
               className="space-y-6"
             >
               <div className="pb-3 border-b border-white/10 relative">
-                <span className="text-cyan-400 font-mono font-bold text-xs tracking-[0.2em] uppercase">
-                  <span className="hidden sm:inline">{t('s1_step')}</span>
-                  <span className="inline sm:hidden">01</span>
-                </span>
+                <div className="flex justify-between items-start mb-1">
+                  <span className="text-cyan-400 font-mono font-bold text-xs tracking-[0.2em] uppercase">
+                    <span className="hidden sm:inline">{t('s1_step')}</span>
+                    <span className="inline sm:hidden">01</span>
+                  </span>
+                  <div className="flex gap-2">
+                    <button onClick={() => handleClearStep(1)} className="text-[10px] sm:text-xs font-bold text-slate-300 hover:text-white bg-white/5 border border-white/10 px-2.5 py-1.5 rounded-lg hover:bg-white/10 transition">현재 단계 지우기</button>
+                    <button onClick={handleResetData} className="text-[10px] sm:text-xs font-bold text-rose-400 hover:text-rose-300 bg-rose-950/20 border border-rose-500/20 px-2.5 py-1.5 rounded-lg hover:bg-rose-950/40 transition">전체 지우기</button>
+                  </div>
+                </div>
                 <h3 className="text-xl sm:text-2xl font-display font-bold text-white mt-1 tracking-tight bg-gradient-to-r from-white to-slate-350 bg-clip-text text-transparent">{t('s1_title')}</h3>
                 <p className="text-sm text-slate-450 mt-1 font-medium">{t('s1_desc')}</p>
               </div>
@@ -1578,15 +1660,25 @@ export default function App() {
             >
               <div className="pb-3 border-b border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative">
                 <div>
-                  <span className="text-cyan-400 font-mono font-bold text-xs tracking-[0.2em] uppercase">
-                    <span className="hidden sm:inline">{t('s2_step') || 'Step 2'}</span>
-                    <span className="inline sm:hidden">02</span>
-                  </span>
+                  <div className="flex justify-between items-start mb-1">
+                    <span className="text-cyan-400 font-mono font-bold text-xs tracking-[0.2em] uppercase">
+                      <span className="hidden sm:inline">{t('s2_step') || 'Step 2'}</span>
+                      <span className="inline sm:hidden">02</span>
+                    </span>
+                    <div className="flex gap-2 sm:hidden mb-2">
+                      <button onClick={() => handleClearStep(2)} className="text-[10px] font-bold text-slate-300 hover:text-white bg-white/5 border border-white/10 px-2 py-1 rounded-lg hover:bg-white/10 transition">현재 단계 지우기</button>
+                      <button onClick={handleResetData} className="text-[10px] font-bold text-rose-400 hover:text-rose-300 bg-rose-950/20 border border-rose-500/20 px-2 py-1 rounded-lg hover:bg-rose-950/40 transition">전체 지우기</button>
+                    </div>
+                  </div>
                   <h3 className="text-xl sm:text-2xl font-display font-bold text-white mt-1 tracking-tight bg-gradient-to-r from-white to-slate-350 bg-clip-text text-transparent">{t('s2_title') || '외국인 인적사항'}</h3>
                 </div>
 
                 {/* AI ID OCR Actions */}
-                <div className="flex gap-2">
+                <div className="flex gap-2 flex-wrap items-center">
+                  <div className="hidden sm:flex gap-2 mr-2">
+                    <button onClick={() => handleClearStep(2)} className="text-[10px] sm:text-xs font-bold text-slate-300 hover:text-white bg-white/5 border border-white/10 px-2.5 py-1.5 rounded-lg hover:bg-white/10 transition">현재 단계 지우기</button>
+                    <button onClick={handleResetData} className="text-[10px] sm:text-xs font-bold text-rose-400 hover:text-rose-300 bg-rose-950/20 border border-rose-500/20 px-2.5 py-1.5 rounded-lg hover:bg-rose-950/40 transition">전체 지우기</button>
+                  </div>
                   <button 
                     onClick={() => setIsCameraModalOpen(true)}
                     className="flex items-center gap-1.5 px-3 py-2 bg-emerald-600/20 text-emerald-400 hover:bg-emerald-600/30 font-extrabold text-xs border border-emerald-500/30 rounded-xl cursor-pointer transition shadow-md"
@@ -1815,10 +1907,16 @@ export default function App() {
               className="space-y-6"
             >
               <div className="pb-3 border-b border-white/10 relative">
-                <span className="text-cyan-400 font-mono font-bold text-xs tracking-[0.2em] uppercase">
-                  <span className="hidden sm:inline">{t('s3_step')}</span>
-                  <span className="inline sm:hidden">03</span>
-                </span>
+                <div className="flex justify-between items-start mb-1">
+                  <span className="text-cyan-400 font-mono font-bold text-xs tracking-[0.2em] uppercase">
+                    <span className="hidden sm:inline">{t('s3_step')}</span>
+                    <span className="inline sm:hidden">03</span>
+                  </span>
+                  <div className="flex gap-2">
+                    <button onClick={() => handleClearStep(3)} className="text-[10px] sm:text-xs font-bold text-slate-300 hover:text-white bg-white/5 border border-white/10 px-2.5 py-1.5 rounded-lg hover:bg-white/10 transition">현재 단계 지우기</button>
+                    <button onClick={handleResetData} className="text-[10px] sm:text-xs font-bold text-rose-400 hover:text-rose-300 bg-rose-950/20 border border-rose-500/20 px-2.5 py-1.5 rounded-lg hover:bg-rose-950/40 transition">전체 지우기</button>
+                  </div>
+                </div>
                 <h3 className="text-xl sm:text-2xl font-display font-bold text-white mt-1 tracking-tight bg-gradient-to-r from-white to-slate-350 bg-clip-text text-transparent">{t('s3_title')}</h3>
               </div>
 
@@ -1930,10 +2028,16 @@ export default function App() {
               className="space-y-6 pb-72"
             >
               <div className="pb-3 border-b border-white/10 relative">
-                <span className="text-cyan-400 font-mono font-bold text-xs tracking-[0.2em] uppercase">
-                  <span className="hidden sm:inline">{t('s4_step')}</span>
-                  <span className="inline sm:hidden">04</span>
-                </span>
+                <div className="flex justify-between items-start mb-1">
+                  <span className="text-cyan-400 font-mono font-bold text-xs tracking-[0.2em] uppercase">
+                    <span className="hidden sm:inline">{t('s4_step')}</span>
+                    <span className="inline sm:hidden">04</span>
+                  </span>
+                  <div className="flex gap-2">
+                    <button onClick={() => handleClearStep(4)} className="text-[10px] sm:text-xs font-bold text-slate-300 hover:text-white bg-white/5 border border-white/10 px-2.5 py-1.5 rounded-lg hover:bg-white/10 transition">현재 단계 지우기</button>
+                    <button onClick={handleResetData} className="text-[10px] sm:text-xs font-bold text-rose-400 hover:text-rose-300 bg-rose-950/20 border border-rose-500/20 px-2.5 py-1.5 rounded-lg hover:bg-rose-950/40 transition">전체 지우기</button>
+                  </div>
+                </div>
                 <h3 className="text-xl sm:text-2xl font-display font-bold text-white mt-1 tracking-tight bg-gradient-to-r from-white to-slate-350 bg-clip-text text-transparent">{t('s4_title')}</h3>
               </div>
 
