@@ -399,12 +399,29 @@ export default function App() {
 
   // Create document core helper
   const drawSingleDocBlob = async (docType: 'main' | 'residence' | 'guarantee', fontBuffer: ArrayBuffer, customFormData: FormData): Promise<Blob> => {
+    let arrayBuffer: ArrayBuffer | null = null;
     const tplB64 = localStorage.getItem(`visaPdfTemplate_${docType}`);
     
-    // Draw on existing government form template
     if (tplB64) {
       try {
-        const arrayBuffer = Uint8Array.from(atob(tplB64), c => c.charCodeAt(0)).buffer;
+        arrayBuffer = Uint8Array.from(atob(tplB64), c => c.charCodeAt(0)).buffer;
+      } catch (err) {
+        console.error("Local storage template error", err);
+      }
+    } else {
+      try {
+        const res = await fetch(`/templates/${docType}.pdf`);
+        if (res.ok) {
+          arrayBuffer = await res.arrayBuffer();
+        }
+      } catch (err) {
+        console.error("Failed to fetch template from public directory", err);
+      }
+    }
+    
+    // Draw on existing government form template
+    if (arrayBuffer) {
+      try {
         const pdfDoc = await PDFDocument.load(arrayBuffer);
       pdfDoc.registerFontkit(fontkit);
  
