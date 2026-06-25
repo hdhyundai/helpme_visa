@@ -1663,7 +1663,7 @@ export default function App() {
                     label={t('l_dob')}
                     value={formData.i_dob}
                     onChange={(val) => handleFormChange('i_dob', val)}
-                    placeholder="예: 1980-08-12"
+                    placeholder="YYYY-MM-DD"
                     error={errorHighlights.has('i_dob')}
                     onOpenChange={(open) => setActivePickerSection(open ? 'personal' : null)}
                   />
@@ -1737,7 +1737,7 @@ export default function App() {
                       label={t('l_pass_exp')}
                       value={formData.i_pass_exp}
                       onChange={(val) => handleFormChange('i_pass_exp', val)}
-                      placeholder={currentLang === 'kr' ? '만료일 (YYYY-MM-DD)' : currentLang === 'en' ? 'Expiry Date (YYYY-MM-DD)' : currentLang === 'ne' ? 'म्याद समाप्त हुने मिति (YYYY-MM-DD)' : 'Ngày hết hạn (YYYY-MM-DD)'}
+                      placeholder="YYYY-MM-DD"
                       error={errorHighlights.has('i_pass_exp')}
                       alignRight
                       onOpenChange={(open) => setActivePickerSection(open ? 'personal' : null)}
@@ -2119,7 +2119,7 @@ export default function App() {
                       label={t('l_dorm_start')}
                       value={formData.i_dorm_start}
                       onChange={(val) => handleFormChange('i_dorm_start', val)}
-                      placeholder="예: 2024-05-18"
+                      placeholder="YYYY-MM-DD"
                       error={errorHighlights.has('i_dorm_start')}
                       className="sm:col-span-2 max-w-[200px]"
                       openUpward
@@ -2202,7 +2202,7 @@ export default function App() {
                           label={t('l_guar_start')}
                           value={formData.i_guar_start}
                           onChange={(val) => handleFormChange('i_guar_start', val)}
-                          placeholder="보증시작일 (YYYY-MM-DD)"
+                          placeholder="YYYY-MM-DD"
                           error={errorHighlights.has('i_guar_start')}
                           openUpward
                           onOpenChange={(open) => setActivePickerSection(open ? 'guar' : null)}
@@ -2211,7 +2211,7 @@ export default function App() {
                           label={t('l_guar_end')}
                           value={formData.i_guar_end}
                           onChange={(val) => handleFormChange('i_guar_end', val)}
-                          placeholder="보증만료일 (YYYY-MM-DD)"
+                          placeholder="YYYY-MM-DD"
                           error={errorHighlights.has('i_guar_end')}
                           alignRight
                           openUpward
