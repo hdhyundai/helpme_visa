@@ -8,10 +8,11 @@
 }
 
 /* Global mobile and typography overrides */
-body {
+html, body {
   word-break: keep-all;
   overflow-wrap: break-word;
   word-wrap: break-word;
+  overscroll-behavior-y: none;
 }
 
 /* High-tech glassmorphism and glossy cyber panels */
