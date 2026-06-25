@@ -1,6 +1,6 @@
 import React from 'react';
 import { 
-  Home, Users, Settings, Plus, Camera, Upload, Trash2, 
+  Home, Users, Plus, Camera, Upload, Trash2, 
   AlertTriangle, Check, CheckCircle2, RotateCw, Info, HelpCircle,
   FileText, Download, ArrowRight, ArrowLeft, Loader2, Search, X, 
   Globe, FileSpreadsheet, Sparkles, Languages, CheckSquare, Edit3, Milestone,
@@ -17,7 +17,6 @@ import { FormData, EmployeeDBItem, VerificationIssue, VerificationResponse, Visa
 import { i18nDict, LangCode, reqNames, docMatrix } from './i18n';
 import { DocInfoModal } from './components/DocInfoModal';
 import { DBModal } from './components/DBModal';
-import { AdminModal } from './components/AdminModal';
 import { DatePicker } from './components/DatePicker';
 import { CameraModal } from './components/CameraModal';
 import { saveEmployee } from './firebase';
@@ -36,7 +35,6 @@ export default function App() {
   const [isDocInfoOpen, setIsDocInfoOpen] = React.useState(false);
   const [activeDocInfoType, setActiveDocInfoType] = React.useState<string>('chk_extension');
   const [isDBModalOpen, setIsDBModalOpen] = React.useState(false);
-  const [isAdminModalOpen, setIsAdminModalOpen] = React.useState(false);
   const [isCameraModalOpen, setIsCameraModalOpen] = React.useState(false);
   const [msgDialog, setMsgDialog] = React.useState<{ isOpen: boolean; title: string; desc: string; type: 'info' | 'error' | 'success' }>({
     isOpen: false,
@@ -362,19 +360,6 @@ export default function App() {
   const handlePrevStep = (prev: number | 'excel') => {
     setStep(prev);
     window.scrollTo(0,0);
-  };
-
-  // Settings
-  const handleUploadTemplate = (docType: string, base64: string) => {
-    try {
-      localStorage.setItem(`visaPdfTemplate_${docType}`, base64);
-    } catch(e) {
-      showAlert('오류 (Error)', '브라우저 스토리지 크기 한계로 업로드할 수 없습니다. 더 적은 저용량 PDF를 업로드해 보세요.', 'error');
-    }
-  };
-
-  const handleClearTemplate = (docType: string) => {
-    localStorage.removeItem(`visaPdfTemplate_${docType}`);
   };
 
   // Reset function
@@ -1199,14 +1184,6 @@ export default function App() {
             >
               <Users className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">{t('btn_db')}</span>
-            </button>
-
-            <button 
-              onClick={() => setIsAdminModalOpen(true)}
-              className="bg-white/5 hover:bg-white/10 active:bg-white/15 text-slate-200 text-xs font-extrabold px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl flex items-center gap-1.5 transition border border-white/10 cursor-pointer shrink-0"
-            >
-              <Settings className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">{t('btn_settings')}</span>
             </button>
 
             <div className="relative shrink-0">
@@ -2710,13 +2687,6 @@ export default function App() {
         onClose={() => setIsDBModalOpen(false)}
         onLoadItem={handleLoadItem}
         onDeleteItem={handleDeleteItem}
-      />
-
-      <AdminModal 
-        isOpen={isAdminModalOpen}
-        onClose={() => setIsAdminModalOpen(false)}
-        onUploadTemplate={handleUploadTemplate}
-        onClearTemplate={handleClearTemplate}
       />
 
       <CameraModal
