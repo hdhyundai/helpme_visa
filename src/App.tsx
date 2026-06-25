@@ -438,6 +438,7 @@ export default function App() {
         setAttachments([]);
         setIssues([]);
         setVerificationPassed(null);
+        setDownloadLinks([]);
         setStep(0);
         showAlert('초기화 성공 (Cleaned)', '임시 작성 데이터가 기기에서 초기화되었습니다.', 'success');
       }
@@ -856,21 +857,7 @@ export default function App() {
       }
 
       setDownloadLinks(links);
-      showConfirm(
-        '서류 생성 완료 (Success)', 
-        '인쇄할 서류가 성공적으로 생성되었습니다. 아래 다운로드 링크를 통해 저장하세요.\n\n새로운 사람 등록을 위해 현재 입력된 데이터를 모두 초기화하시겠습니까?\n(확인을 누르면 데이터가 지워지지만 다운로드 링크는 유지됩니다.)',
-        () => {
-          setFormData(initialFormData);
-          try {
-            localStorage.removeItem('visaAutoSave');
-          } catch(e) {}
-          setErrorHighlights(new Set());
-          setAttachments([]);
-          setIssues([]);
-          setVerificationPassed(null);
-          showAlert('초기화 완료', '데이터가 초기화되었습니다. 다운로드 후 언제든 1단계로 돌아가 새 등록을 시작하세요.', 'success');
-        }
-      );
+      showAlert('서류 생성 완료 (Success)', '인쇄할 서류가 성공적으로 생성되었습니다. 아래 다운로드 링크를 통해 저장하세요.', 'success');
     } catch(e: any) {
       showAlert('완성 실패 (Failed)', e.message || '인쇄 배치 생성에 문제가 있습니다.', 'error');
     } finally {
@@ -1255,6 +1242,14 @@ export default function App() {
 
           <div className="flex items-center gap-2">
             <button 
+              onClick={handleResetData}
+              className="bg-rose-950/40 hover:bg-rose-900/60 text-rose-300 text-xs font-extrabold px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl flex items-center gap-1.5 transition border border-rose-500/30 cursor-pointer shrink-0"
+              title="전체 데이터 초기화"
+            >
+              <RotateCw className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">전체 초기화 하기</span>
+            </button>
+            <button 
               onClick={() => setIsDBModalOpen(true)}
               className="bg-emerald-600/90 hover:bg-emerald-500 active:bg-emerald-700 text-white text-xs font-extrabold px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl flex items-center gap-1.5 transition shadow-[0_0_15px_rgba(16,185,129,0.3)] border border-emerald-500/30 cursor-pointer shrink-0"
             >
@@ -1417,16 +1412,6 @@ export default function App() {
                       <span className="text-slate-500 font-mono text-[9px] sm:text-[10px] font-medium mt-1 sm:mt-1.5 uppercase tracking-widest leading-none">BATCH COMPLIANCE ENGINE</span>
                     </div>
                   </div>
-                </button>
-              </div>
-
-              {/* Reset button */}
-              <div className="flex justify-center pt-2">
-                <button 
-                  onClick={handleResetData}
-                  className="text-xs font-bold text-rose-400 hover:text-rose-300 bg-rose-950/20 hover:bg-rose-950/40 border border-rose-500/20 px-4 py-2.5 rounded-xl transition cursor-pointer"
-                >
-                  임시 데이터 전체 초기화 (Hard Reset)
                 </button>
               </div>
             </motion.div>
@@ -2748,6 +2733,15 @@ export default function App() {
                       className="text-xs text-emerald-400 leading-relaxed font-semibold transition animate-pulse" 
                       dangerouslySetInnerHTML={{ __html: t('s7_success_desc') }} 
                     />
+                    <div className="mt-6 flex justify-center">
+                      <button
+                        onClick={handleResetData}
+                        className="bg-rose-950/40 hover:bg-rose-900/60 text-rose-300 font-bold py-2.5 px-5 rounded-xl border border-rose-500/30 transition text-sm flex items-center gap-2 cursor-pointer"
+                      >
+                        <RotateCw className="w-4 h-4" />
+                        전체 데이터 초기화 하기
+                      </button>
+                    </div>
                   </motion.div>
                 );
               })()}
