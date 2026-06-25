@@ -147,12 +147,12 @@ export const i18nDict: Record<LangCode, Record<string, string>> = {
     's1_desc': 'Fields will change dynamically based on your selection.',
     's1_visa': 'Current Visa', 
     's1_req': 'Request Type',
-    'req_alien_reg': 'Alien Registration', 
-    'req_extension': 'Extension of Stay', 
-    'req_change_work': 'Change of Workplace', 
-    'req_reentry': 'Re-entry Permit', 
+    'req_alien_reg': 'Foreigner Registration', 
+    'req_extension': 'Extension of stay for registered foreigners', 
+    'req_change_work': 'Permit to change employment', 
+    'req_reentry': 'Re-entry Permit(Multiple)', 
     'req_reissue': 'Re-issuance', 
-    'req_change_status': 'Change of Status',
+    'req_change_status': 'Change of status for registered foreigners',
     'btn_next_step': 'Proceed to Next Step', 
     'btn_to_excel': 'Go to Excel Upload',
     's_excel_step': 'Step 2 (Batch)', 
@@ -543,79 +543,79 @@ export interface RequiredDoc {
 export const docMatrix: Record<string, Record<string, RequiredDoc[]>> = {
   'E-9': {
     'chk_alien_reg': [
-      { name: { kr: '통합신청서', en: 'Application Form', vn: 'Đơn đăng ký', ne: 'आवेदन फारम' }, type: 'auto' },
-      { name: { kr: '거주/숙소제공 확인서', en: 'Proof of Residence Form', vn: 'Giấy chứng minh nơi ở', ne: 'निवास पुष्टि फारम' }, type: 'auto' },
-      { name: { kr: '여권 원본', en: 'Original Passport', vn: 'Hộ chiếu gốc', ne: 'सक्कली राहदानी' }, type: 'personal' },
+      { name: { kr: '통합신청서', en: 'Application form (Template #34)', vn: 'Đơn đăng ký', ne: 'आवेदन फारम' }, type: 'auto' },
+      { name: { kr: '거주/숙소제공 확인서', en: 'Document evidencing place of stay', vn: 'Giấy chứng minh nơi ở', ne: 'निवास पुष्टि फारम' }, type: 'auto' },
+      { name: { kr: '여권 원본', en: 'Passport', vn: 'Hộ chiếu gốc', ne: 'सक्कली राहदानी' }, type: 'personal' },
       { name: { kr: '표준규격사진 1매', en: '1 Standard Photo', vn: '1 Ảnh tiêu chuẩn', ne: '१ मानक फोटो' }, type: 'personal' },
       { name: { kr: '마약검사확인서', en: 'Drug Test Certificate', vn: 'Giấy khám ma túy', ne: 'लागूपदार्थ परीक्षण प्रमाणपत्र' }, type: 'personal' },
-      { name: { kr: '사업자 등록증 사본', en: 'Business Registration Certificate', vn: 'Giấy phép kinh doanh', ne: 'व्यवसाय दर्ता प्रमाणपत्र' }, type: 'company' },
-      { name: { kr: '고용허가서 사본', en: 'Copy of Employment Permit', vn: 'Bản sao Giấy phép LĐ', ne: 'रोजगार अनुमति पत्र' }, type: 'company' },
-      { name: { kr: '표준근로계약서 사본', en: 'Copy of Standard Labor Contract', vn: 'Bản sao Hợp đồng LĐ', ne: 'श्रम सम्झौता' }, type: 'company' }
+      { name: { kr: '사업자 등록증 사본', en: 'Copy of business license', vn: 'Giấy phép kinh doanh', ne: 'व्यवसाय दर्ता प्रमाणपत्र' }, type: 'company' },
+      { name: { kr: '고용허가서 사본', en: 'Copy of employment permit', vn: 'Bản sao Giấy phép LĐ', ne: 'रोजगार अनुमति पत्र' }, type: 'company' },
+      { name: { kr: '표준근로계약서 사본', en: 'Standard employment contract', vn: 'Bản sao Hợp đồng LĐ', ne: 'श्रम सम्झौता' }, type: 'company' }
     ],
     'chk_extension': [
-      { name: { kr: '통합신청서', en: 'Application Form', vn: 'Đơn đăng ký', ne: 'आवेदन फारम' }, type: 'auto' },
-      { name: { kr: '거주/숙소제공 확인서', en: 'Proof of Residence Form', vn: 'Giấy chứng minh nơi ở', ne: 'निवास पुष्टि फारम' }, type: 'auto' },
-      { name: { kr: '여권', en: 'Passport', vn: 'Hộ chiếu', ne: 'राहदानी' }, type: 'personal' },
-      { name: { kr: '외국인 등록증', en: 'Alien Registration Card (ARC)', vn: 'Thẻ cư trú (ARC)', ne: 'विदेशी दर्ता कार्ड (ARC)' }, type: 'personal' },
-      { name: { kr: '고용허가서 사본', en: 'Copy of Employment Permit', vn: 'Bản sao Giấy phép LĐ', ne: 'रोजगार अनुमति पत्र' }, type: 'company' },
-      { name: { kr: '표준근로계약서 사본', en: 'Copy of Standard Labor Contract', vn: 'Bản sao Hợp đồng LĐ', ne: 'श्रम सम्झौता' }, type: 'company' },
-      { name: { kr: '사업자 등록증 사본', en: 'Business Registration Certificate', vn: 'Giấy phép kinh doanh', ne: 'व्यवसाय दर्ता प्रमाणपत्र' }, type: 'company' }
+      { name: { kr: '통합신청서', en: 'Application form (Template #34)', vn: 'Đơn đăng ký', ne: 'आवेदन फारम' }, type: 'auto' },
+      { name: { kr: '거주/숙소제공 확인서', en: 'Document evidencing place of stay', vn: 'Giấy chứng minh nơi ở', ne: 'निवास पुष्टि फारम' }, type: 'auto' },
+      { name: { kr: '여권', en: 'Passport or Entry Permit for Foreigners', vn: 'Hộ chiếu', ne: 'राहदानी' }, type: 'personal' },
+      { name: { kr: '외국인 등록증', en: 'Foreigner Registration Card', vn: 'Thẻ cư trú (ARC)', ne: 'विदेशी दर्ता कार्ड (ARC)' }, type: 'personal' },
+      { name: { kr: '고용허가서 사본', en: 'Copy of employment permit', vn: 'Bản sao Giấy phép LĐ', ne: 'रोजगार अनुमति पत्र' }, type: 'company' },
+      { name: { kr: '표준근로계약서 사본', en: 'Standard employment contract', vn: 'Bản sao Hợp đồng LĐ', ne: 'श्रम सम्झौता' }, type: 'company' },
+      { name: { kr: '사업자 등록증 사본', en: 'Copy of business license', vn: 'Giấy phép kinh doanh', ne: 'व्यवसाय दर्ता प्रमाणपत्र' }, type: 'company' }
     ],
     'chk_change_work': [
-      { name: { kr: '통합신청서', en: 'Application Form', vn: 'Đơn đăng ký', ne: 'आवेदन फारम' }, type: 'auto' },
-      { name: { kr: '거주/숙소제공 확인서', en: 'Proof of Residence Form', vn: 'Giấy chứng minh nơi ở', ne: 'निवास पुष्टि फारम' }, type: 'auto' },
-      { name: { kr: '여권', en: 'Passport', vn: 'Hộ chiếu', ne: 'राहदानी' }, type: 'personal' },
-      { name: { kr: '외국인 등록증', en: 'Alien Registration Card (ARC)', vn: 'Thẻ cư trú (ARC)', ne: 'विदेशी दर्ता कार्ड (ARC)' }, type: 'personal' },
-      { name: { kr: '고용허가서 사본', en: 'Copy of Employment Permit', vn: 'Bản sao Giấy phép LĐ', ne: 'रोजगार अनुमति पत्र' }, type: 'company' },
-      { name: { kr: '표준근로계약서 사본', en: 'Copy of Standard Labor Contract', vn: 'Bản sao Hợp đồng LĐ', ne: 'श्रम सम्झौता' }, type: 'company' },
-      { name: { kr: '사업자 등록증 사본', en: 'Business Registration Certificate', vn: 'Giấy phép kinh doanh', ne: 'व्यवसाय दर्ता प्रमाणपत्र' }, type: 'company' }
+      { name: { kr: '통합신청서', en: 'Application form (Template #34)', vn: 'Đơn đăng ký', ne: 'आवेदन फारम' }, type: 'auto' },
+      { name: { kr: '거주/숙소제공 확인서', en: 'Document evidencing place of stay', vn: 'Giấy chứng minh nơi ở', ne: 'निवास पुष्टि फारम' }, type: 'auto' },
+      { name: { kr: '여권', en: 'Passport or Entry Permit for Foreigners', vn: 'Hộ chiếu', ne: 'राहदानी' }, type: 'personal' },
+      { name: { kr: '외국인 등록증', en: 'Foreigner Registration Card', vn: 'Thẻ cư trú (ARC)', ne: 'विदेशी दर्ता कार्ड (ARC)' }, type: 'personal' },
+      { name: { kr: '고용허가서 사본', en: 'Copy of employment permit', vn: 'Bản sao Giấy phép LĐ', ne: 'रोजगार अनुमति पत्र' }, type: 'company' },
+      { name: { kr: '표준근로계약서 사본', en: 'Standard employment contract', vn: 'Bản sao Hợp đồng LĐ', ne: 'श्रम सम्झौता' }, type: 'company' },
+      { name: { kr: '사업자 등록증 사본', en: 'Copy of business license', vn: 'Giấy phép kinh doanh', ne: 'व्यवसाय दर्ता प्रमाणपत्र' }, type: 'company' }
     ],
     'chk_reentry': [
-      { name: { kr: '통합신청서', en: 'Application Form', vn: 'Đơn đăng ký', ne: 'आवेदन फारम' }, type: 'auto' },
+      { name: { kr: '통합신청서', en: 'Application form (Template #34)', vn: 'Đơn đăng ký', ne: 'आवेदन फारम' }, type: 'auto' },
       { name: { kr: '여권', en: 'Passport', vn: 'Hộ chiếu', ne: 'राहदानी' }, type: 'personal' },
-      { name: { kr: '외국인등록증', en: 'Alien Registration Card (ARC)', vn: 'Thẻ cư trú (ARC)', ne: 'विदेशी दर्ता कार्ड (ARC)' }, type: 'personal' }
+      { name: { kr: '외국인등록증', en: 'Foreigner Registration Card', vn: 'Thẻ cư trú (ARC)', ne: 'विदेशी दर्ता कार्ड (ARC)' }, type: 'personal' }
     ],
     'default': [
-      { name: { kr: '통합신청서', en: 'Application Form', vn: 'Đơn đăng ký', ne: 'आवेदन फारम' }, type: 'auto' },
-      { name: { kr: '여권 및 외국인 등록증', en: 'Passport & ARC', vn: 'Hộ chiếu & Thẻ cư trú', ne: 'राहदानी र ARC' }, type: 'personal' }
+      { name: { kr: '통합신청서', en: 'Application form (Template #34)', vn: 'Đơn đăng ký', ne: 'आवेदन फारम' }, type: 'auto' },
+      { name: { kr: '여권 및 외국인 등록증', en: 'Passport and Foreigner Registration Card', vn: 'Hộ chiếu & Thẻ cư trú', ne: 'राहदानी र ARC' }, type: 'personal' }
     ]
   },
   'E-7': {
     'chk_extension': [
-      { name: { kr: '통합신청서', en: 'Application Form', vn: 'Đơn đăng ký', ne: 'आवेदन फारम' }, type: 'auto' },
+      { name: { kr: '통합신청서', en: 'Application form (Template #34)', vn: 'Đơn đăng ký', ne: 'आवेदन फारम' }, type: 'auto' },
       { name: { kr: '신원보증서', en: 'Original Guarantee Form', vn: 'Bản gốc Giấy bảo lãnh', ne: 'सक्कली ग्यारेन्टी फारम' }, type: 'auto' },
-      { name: { kr: '거주/숙소제공 확인서', en: 'Proof of Residence Form', vn: 'Giấy chứng minh nơi ở', ne: 'निवास पुष्टि फारम' }, type: 'auto' },
-      { name: { kr: '여권 및 외국인 등록증', en: 'Passport & ARC', vn: 'Hộ chiếu & Thẻ cư trú', ne: 'राहदानी र ARC' }, type: 'personal' },
+      { name: { kr: '거주/숙소제공 확인서', en: 'Document evidencing place of stay', vn: 'Giấy chứng minh nơi ở', ne: 'निवास पुष्टि फारम' }, type: 'auto' },
+      { name: { kr: '여권 및 외국인 등록증', en: 'Passport and Foreigner Registration Card', vn: 'Hộ chiếu & Thẻ cư trú', ne: 'राहदानी र ARC' }, type: 'personal' },
       { name: { kr: '개인 소득금액 증명', en: 'Proof of Personal Income', vn: 'Chứng minh thu nhập cá nhân', ne: 'व्यक्तिगत आयको प्रमाण' }, type: 'personal' },
       { name: { kr: '고용계약서', en: 'Employment Contract', vn: 'Hợp đồng lao động', ne: 'रोजगार सम्झौता' }, type: 'company' },
-      { name: { kr: '사업장 등록증 사본', en: 'Business/Corporate Registration', vn: 'Giấy phép KD', ne: 'व्यवसाय दर्ता' }, type: 'company' },
+      { name: { kr: '사업장 등록증 사본', en: 'Copy of business license', vn: 'Giấy phép KD', ne: 'व्यवसाय दर्ता' }, type: 'company' },
       { name: { kr: '고용주 납세증명서 등', en: 'Employer Tax Certificates', vn: 'Chứng nhận nộp thuế', ne: 'रोजगारदाता कर प्रमाणपत्रहरू' }, type: 'company' }
     ],
     'chk_change_work': [
-      { name: { kr: '통합신청서', en: 'Integrated Application Form', vn: 'Đơn xin tổng hợp', ne: 'एकीकृत आवेदन फारम' }, type: 'auto' },
-      { name: { kr: '여권 및 외국인 등록증', en: 'Passport & ARC', vn: 'Hộ chiếu & Thẻ cư trú', ne: 'राहदानी र ARC' }, type: 'personal' },
+      { name: { kr: '통합신청서', en: 'Application form (Template #34)', vn: 'Đơn xin tổng hợp', ne: 'एकीकृत आवेदन फारम' }, type: 'auto' },
+      { name: { kr: '여권 및 외국인 등록증', en: 'Passport and Foreigner Registration Card', vn: 'Hộ chiếu & Thẻ cư trú', ne: 'राहदानी र ARC' }, type: 'personal' },
       { name: { kr: '고용추천서', en: 'Employment Recommendation', vn: 'Thư giới thiệu việc làm', ne: 'रोजगार सिफारिस' }, type: 'company' },
       { name: { kr: '고용계약서', en: 'Employment Contract', vn: 'Hợp đồng lao động', ne: 'रोजगार सम्झौता' }, type: 'company' },
-      { name: { kr: '사업자등록증', en: 'Business Registration', vn: 'Giấy phép kinh doanh', ne: 'व्यवसाय दर्ता' }, type: 'company' }
+      { name: { kr: '사업자등록증', en: 'Copy of business license', vn: 'Giấy phép kinh doanh', ne: 'व्यवसाय दर्ता' }, type: 'company' }
     ],
     'chk_reentry': [
-      { name: { kr: '통합신청서', en: 'Application Form', vn: 'Đơn đăng ký', ne: 'आवेदन फारम' }, type: 'auto' },
-      { name: { kr: '여권 원본', en: 'Original Passport', vn: 'Hộ chiếu gốc', ne: 'सक्कली राहदानी' }, type: 'personal' },
-      { name: { kr: '외국인 등록증', en: 'Alien Registration Card (ARC)', vn: 'Thẻ cư trú (ARC)', ne: 'विदेशी दर्ता कार्ड (ARC)' }, type: 'personal' },
+      { name: { kr: '통합신청서', en: 'Application form (Template #34)', vn: 'Đơn đăng ký', ne: 'आवेदन फारम' }, type: 'auto' },
+      { name: { kr: '여권 원본', en: 'Passport', vn: 'Hộ chiếu gốc', ne: 'सक्कली राहदानी' }, type: 'personal' },
+      { name: { kr: '외국인 등록증', en: 'Foreigner Registration Card', vn: 'Thẻ cư trú (ARC)', ne: 'विदेशी दर्ता कार्ड (ARC)' }, type: 'personal' },
       { name: { kr: '수수료', en: 'Processing Fee', vn: 'Lệ phí', ne: 'प्रशोधन शुल्क' }, type: 'personal' }
     ],
     'chk_change_status': [
-      { name: { kr: '통합신청서', en: 'Application Form', vn: 'Đơn đăng ký', ne: 'आवेदन फारम' }, type: 'auto' },
+      { name: { kr: '통합신청서', en: 'Application form (Template #34)', vn: 'Đơn đăng ký', ne: 'आवेदन फारम' }, type: 'auto' },
       { name: { kr: '신원보증서', en: 'Original Guarantee Form', vn: 'Bản gốc Giấy bảo lãnh', ne: 'सक्कली ग्यारेन्टी फारम' }, type: 'auto' },
-      { name: { kr: '거주/숙소제공 확인서', en: 'Proof of Residence Form', vn: 'Giấy chứng minh nơi ở', ne: 'निवास पुष्टि फारम' }, type: 'auto' },
-      { name: { kr: '여권 및 외국인 등록증', en: 'Passport & ARC', vn: 'Hộ chiếu & Thẻ cư trú', ne: 'राहदानी र ARC' }, type: 'personal' },
+      { name: { kr: '거주/숙소제공 확인서', en: 'Document evidencing place of stay', vn: 'Giấy chứng minh nơi ở', ne: 'निवास पुष्टि फारम' }, type: 'auto' },
+      { name: { kr: '여권 및 외국인 등록증', en: 'Passport and Foreigner Registration Card', vn: 'Hộ chiếu & Thẻ cư trú', ne: 'राहदानी र ARC' }, type: 'personal' },
       { name: { kr: '개인 소득금액 증명', en: 'Proof of Personal Income', vn: 'Chứng minh thu nhập cá nhân', ne: 'व्यक्तिगत आयको प्रमाण' }, type: 'personal' },
       { name: { kr: '자격 요건 입증 서류', en: 'Proof of Qualifications', vn: 'Giấy tờ chứng minh trình độ', ne: 'योग्यताको प्रमाण' }, type: 'personal' },
-      { name: { kr: '고용계약서 및 사업자등록증', en: 'Contract & Business Registration', vn: 'Hợp đồng LĐ & GPKD', ne: 'सम्झौता र व्यवसाय दर्ता' }, type: 'company' }
+      { name: { kr: '고용계약서 및 사업자등록증', en: 'Standard employment contract and Copy of business license', vn: 'Hợp đồng LĐ & GPKD', ne: 'सम्झौता र व्यवसाय दर्ता' }, type: 'company' }
     ],
     'default': [
-      { name: { kr: '통합신청서', en: 'Application Form', vn: 'Đơn đăng ký', ne: 'आवेदन फारम' }, type: 'auto' },
-      { name: { kr: '여권 및 외국인 등록증', en: 'Passport & ARC', vn: 'Hộ chiếu & Thẻ cư trú', ne: 'राहदानी र ARC' }, type: 'personal' }
+      { name: { kr: '통합신청서', en: 'Application form (Template #34)', vn: 'Đơn đăng ký', ne: 'आवेदन फारम' }, type: 'auto' },
+      { name: { kr: '여권 및 외국인 등록증', en: 'Passport and Foreigner Registration Card', vn: 'Hộ chiếu & Thẻ cư trú', ne: 'राहदानी र ARC' }, type: 'personal' }
     ]
   }
 };
