@@ -16,13 +16,25 @@ export const DBModal: React.FC<DBModalProps> = ({
   onLoadItem,
   onDeleteItem,
 }) => {
+  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+  const [passwordInput, setPasswordInput] = React.useState('');
+  const [pwdError, setPwdError] = React.useState(false);
+
   const [search, setSearch] = React.useState('');
   const [items, setItems] = React.useState<EmployeeDBItem[]>([]);
   const [loading, setLoading] = React.useState(false);
   const [dbSource, setDbSource] = React.useState<'cloud' | 'local'>('local');
 
   React.useEffect(() => {
-    if (isOpen) {
+    if (!isOpen) {
+      setIsAuthenticated(false);
+      setPasswordInput('');
+      setPwdError(false);
+    }
+  }, [isOpen]);
+
+  React.useEffect(() => {
+    if (isOpen && isAuthenticated) {
       setLoading(true);
       fetchEmployees()
         .then(({ source, items: loadedItems }) => {
@@ -36,9 +48,20 @@ export const DBModal: React.FC<DBModalProps> = ({
           setLoading(false);
         });
     }
-  }, [isOpen]);
+  }, [isOpen, isAuthenticated]);
 
   if (!isOpen) return null;
+
+  const handlePasswordSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (passwordInput === '1234') { // Default password
+      setIsAuthenticated(true);
+      setPwdError(false);
+    } else {
+      setPwdError(true);
+      setPasswordInput('');
+    }
+  };
 
   const filteredItems = items.filter(emp => {
     const fullSearch = `${emp.i_surname} ${emp.i_givenname} ${emp.i_arc}`.toLowerCase();
@@ -50,6 +73,41 @@ export const DBModal: React.FC<DBModalProps> = ({
     await deleteEmployee(arc); // delete from firebase & local
     setItems(prev => prev.filter(item => item.i_arc !== arc));
   };
+
+  if (!isAuthenticated) {
+    return (
+      <div className="fixed inset-0 bg-black/85 backdrop-blur-md z-[160] flex items-center justify-center p-4">
+        <div className="glass-premium p-6 rounded-3xl w-full max-w-sm shadow-[0_0_50px_rgba(0,0,0,0.8)] border border-blue-500/20 relative cyber-bracket animate-[slideUpFade_0.4s_ease-out]">
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="text-xl font-display font-bold text-white flex items-center gap-2">
+              <ShieldAlert className="w-5 h-5 text-rose-400" />
+              보안 인증 필요
+            </h3>
+            <button onClick={onClose} className="text-slate-400 hover:text-white transition cursor-pointer">
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+          <form onSubmit={handlePasswordSubmit} className="flex flex-col gap-4">
+            <div>
+              <p className="text-sm text-slate-400 mb-3">직원명부를 열람하려면 비밀번호를 입력하세요.</p>
+              <input
+                type="password"
+                value={passwordInput}
+                onChange={(e) => setPasswordInput(e.target.value)}
+                placeholder="비밀번호"
+                autoFocus
+                className={`w-full bg-black/40 border ${pwdError ? 'border-rose-500/50 focus:border-rose-500' : 'border-white/10 focus:border-blue-500'} text-white placeholder-slate-500 rounded-xl px-4 py-3 focus:outline-none transition-colors text-center text-lg tracking-widest font-mono`}
+              />
+              {pwdError && <p className="text-rose-400 text-xs mt-2 text-center">비밀번호가 올바르지 않습니다.</p>}
+            </div>
+            <button type="submit" className="w-full py-3.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold transition shadow-[0_0_15px_rgba(59,130,246,0.3)] mt-2 cursor-pointer">
+              확인
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="fixed inset-0 bg-black/85 backdrop-blur-md z-[160] flex items-center justify-center p-4">
