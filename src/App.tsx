@@ -314,7 +314,7 @@ export default function App() {
         body: JSON.stringify({
           documents: attachments,
           formData: formData,
-          language: currentLang === 'kr' ? 'Korean' : currentLang === 'vn' ? 'Vietnamese' : 'English'
+          language: currentLang === 'kr' ? 'Korean' : currentLang === 'vn' ? 'Vietnamese' : currentLang === 'ne' ? 'Nepali' : 'English'
         })
       });
 
@@ -743,11 +743,13 @@ export default function App() {
   const generateSelectedPDFs = async () => {
     if (attachments.length === 0) {
       showConfirm(
-        currentLang === 'kr' ? '서류 업로드 필요' : currentLang === 'en' ? 'Upload Required' : 'Yêu cầu tải lên',
+        currentLang === 'kr' ? '서류 업로드 필요' : currentLang === 'en' ? 'Upload Required' : currentLang === 'ne' ? 'कागजात अपलोड आवश्यक' : 'Yêu cầu tải lên',
         currentLang === 'kr' 
           ? '검증용 증빙 서류(여권, 비자 등)가 업로드되어 있지 않습니다. 이대로 서류 일괄 생성을 진행하시겠습니까?' 
           : currentLang === 'en' 
           ? 'Verification documents have not been uploaded. Do you still want to proceed with document generation?' 
+          : currentLang === 'ne'
+          ? 'प्रमाणीकरण कागजातहरू अपलोड गरिएको छैन। के तपाईं अझै पनि कागजात सिर्जना गर्न चाहनुहुन्छ?'
           : 'Tài liệu xác minh chưa được tải lên. Bạn vẫn muốn tiếp tục tạo tài liệu?',
         () => {
           proceedGenerateSelectedPDFs();
@@ -926,7 +928,11 @@ export default function App() {
       if (!hasRequiredHeaders) {
         throw new Error(currentLang === 'kr' 
           ? '올바른 표준 엑셀 템플릿 양식이 아닙니다. 상단의 [표준 템플릿 다운로드] 버튼을 이용해 지정 양식을 활용해 주세요.' 
-          : 'Invalid standard excel template format. Please download and use the provided practice template.');
+          : currentLang === 'en'
+          ? 'Invalid standard excel template format. Please download and use the provided practice template.'
+          : currentLang === 'ne'
+          ? 'अवैध मानक एक्सेल टेम्प्लेट ढाँचा। कृपया प्रदान गरिएको टेम्प्लेट डाउनलोड गरी प्रयोग गर्नुहोस्।'
+          : 'Định dạng mẫu Excel không hợp lệ. Vui lòng tải và sử dụng mẫu chuẩn.');
       }
 
       const rows: any[] = [];
@@ -1206,6 +1212,7 @@ export default function App() {
                 <option value="kr" className="bg-[#121217] text-white">🇰🇷</option>
                 <option value="en" className="bg-[#121217] text-white">🇺🇸</option>
                 <option value="vn" className="bg-[#121217] text-white">🇻🇳</option>
+                <option value="ne" className="bg-[#121217] text-white">🇳🇵</option>
               </select>
             </div>
           </div>
@@ -1405,7 +1412,7 @@ export default function App() {
                             className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-blue-500 border-white/20 cursor-pointer" 
                           />
                           <span className={`font-extrabold text-xs sm:text-sm tracking-wide ${isSelected ? 'text-blue-400 font-black' : 'text-slate-300'}`}>
-                            {vt} <span className="hidden xs:inline">{currentLang === 'kr' ? '비자자격' : currentLang === 'en' ? 'Visa' : 'Tư cách thị thực'}</span>
+                            {vt} <span className="hidden xs:inline">{currentLang === 'kr' ? '비자자격' : currentLang === 'en' ? 'Visa' : currentLang === 'ne' ? 'भिसा' : 'Tư cách thị thực'}</span>
                           </span>
                         </div>
                       </label>
@@ -1450,7 +1457,7 @@ export default function App() {
                             setIsDocInfoOpen(true);
                           }}
                           className="absolute right-1.5 sm:right-4 top-1/2 -translate-y-1/2 p-1.5 sm:p-2 text-slate-500 hover:text-blue-450 transition"
-                          title={currentLang === 'kr' ? '상세 서류 보기' : currentLang === 'en' ? 'View Document details' : 'Xem chi tiết tài liệu'}
+                          title={currentLang === 'kr' ? '상세 서류 보기' : currentLang === 'en' ? 'View Document details' : currentLang === 'ne' ? 'कागजात विवरण हेर्नुहोस्' : 'Xem chi tiết tài liệu'}
                         >
                           <Info className="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5" />
                         </button>
@@ -1463,12 +1470,12 @@ export default function App() {
               {/* Conditional Change of Status specifications */}
               {formData.reqType === 'chk_change_status' && (
                 <div className="bg-blue-950/20 p-4 rounded-2xl border border-blue-500/20 flex flex-col gap-2 step-container-transition">
-                  <label className="text-xs font-extrabold text-blue-400 tracking-wider uppercase">{currentLang === 'kr' ? '체류자격 변경 세부 명칭 (예: E-7-4)' : currentLang === 'en' ? 'Specific Visa Type to Change (e.g., E-7-4)' : 'Tên chi tiết chuyển đổi tư cách thị thực (VD: E-7-4)'}</label>
+                  <label className="text-xs font-extrabold text-blue-400 tracking-wider uppercase">{currentLang === 'kr' ? '체류자격 변경 세부 명칭 (예: E-7-4)' : currentLang === 'en' ? 'Specific Visa Type to Change (e.g., E-7-4)' : currentLang === 'ne' ? 'परिवर्तन गर्ने भिसा प्रकार (जस्तै: E-7-4)' : 'Tên chi tiết chuyển đổi tư cách thị thực (VD: E-7-4)'}</label>
                   <input 
                     type="text" 
                     value={formData.val_change_status}
                     onChange={(e) => handleFormChange('val_change_status', e.target.value)}
-                    placeholder={currentLang === 'kr' ? '예: E-7-4 (숙련기능 수용자격)' : currentLang === 'en' ? 'e.g. E-7-4 (Skilled Worker)' : 'VD: E-7-4 (Lao động lành nghề)'}
+                    placeholder={currentLang === 'kr' ? '예: E-7-4 (숙련기능 수용자격)' : currentLang === 'en' ? 'e.g. E-7-4 (Skilled Worker)' : currentLang === 'ne' ? 'जस्तै: E-7-4 (दक्ष कामदार)' : 'VD: E-7-4 (Lao động lành nghề)'}
                     className="w-full bg-black/40 border border-white/10 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 transition-all font-semibold"
                   />
                 </div>
@@ -1548,7 +1555,7 @@ export default function App() {
 
                   <label className="flex-1 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold rounded-xl cursor-pointer text-sm flex justify-center items-center gap-1.5 transition shadow-[0_0_20px_rgba(16,185,129,0.3)] border border-emerald-500/20">
                     <Upload className="w-4 h-4" />
-                    <span>{currentLang === 'kr' ? '양식 업로드' : currentLang === 'en' ? 'Upload Template' : 'Tải lên biểu mẫu'}</span>
+                    <span>{currentLang === 'kr' ? '양식 업로드' : currentLang === 'en' ? 'Upload Template' : currentLang === 'ne' ? 'टेम्प्लेट अपलोड' : 'Tải lên biểu mẫu'}</span>
                     <input 
                       type="file" 
                       accept=".xlsx, .xls"
@@ -1595,11 +1602,11 @@ export default function App() {
                     className="flex items-center gap-1.5 px-3 py-2 bg-emerald-600/20 text-emerald-400 hover:bg-emerald-600/30 font-extrabold text-xs border border-emerald-500/30 rounded-xl cursor-pointer transition shadow-md"
                   >
                     <Camera className="w-3.5 h-3.5" />
-                    <span>{currentLang === 'kr' ? '신분증 촬영' : currentLang === 'en' ? 'Scan ID' : 'Chụp Thẻ ID'}</span>
+                    <span>{currentLang === 'kr' ? '신분증 촬영' : currentLang === 'en' ? 'Scan ID' : currentLang === 'ne' ? 'ID स्क्यान' : 'Chụp Thẻ ID'}</span>
                   </button>
                   <label className="flex items-center gap-1.5 px-3 py-2 bg-blue-600/20 text-blue-400 hover:bg-blue-600/30 font-extrabold text-xs border border-blue-500/30 rounded-xl cursor-pointer transition shadow-md">
                     <Upload className="w-3.5 h-3.5" />
-                    <span>{currentLang === 'kr' ? '스캔 파일' : currentLang === 'en' ? 'Scan File' : 'Quét tệp OCR'}</span>
+                    <span>{currentLang === 'kr' ? '스캔 파일' : currentLang === 'en' ? 'Scan File' : currentLang === 'ne' ? 'फाइल स्क्यान' : 'Quét tệp OCR'}</span>
                     <input 
                       type="file" 
                       accept="image/*" 
@@ -1616,7 +1623,7 @@ export default function App() {
                   <div className="absolute inset-0 bg-black/90 z-20 backdrop-blur-sm flex flex-col items-center justify-center rounded-3xl">
                     <Loader2 className="w-10 h-10 text-blue-550 text-blue-400 animate-spin mb-2" />
                     <span className="text-sm font-extrabold text-blue-400 animate-pulse">
-                      {currentLang === 'kr' ? 'AI 신분증 판독 중...' : currentLang === 'en' ? 'AI OCR scanning...' : 'AI đang phân tích thẻ...'}
+                      {currentLang === 'kr' ? 'AI 신분증 판독 중...' : currentLang === 'en' ? 'AI OCR scanning...' : currentLang === 'ne' ? 'AI ले स्क्यान गर्दैछ...' : 'AI đang phân tích thẻ...'}
                     </span>
                   </div>
                 )}
@@ -1730,7 +1737,7 @@ export default function App() {
                       label={t('l_pass_exp')}
                       value={formData.i_pass_exp}
                       onChange={(val) => handleFormChange('i_pass_exp', val)}
-                      placeholder={currentLang === 'kr' ? '만료일 (YYYY-MM-DD)' : currentLang === 'en' ? 'Expiry Date (YYYY-MM-DD)' : 'Ngày hết hạn (YYYY-MM-DD)'}
+                      placeholder={currentLang === 'kr' ? '만료일 (YYYY-MM-DD)' : currentLang === 'en' ? 'Expiry Date (YYYY-MM-DD)' : currentLang === 'ne' ? 'म्याद समाप्त हुने मिति (YYYY-MM-DD)' : 'Ngày hết hạn (YYYY-MM-DD)'}
                       error={errorHighlights.has('i_pass_exp')}
                       alignRight
                       onOpenChange={(open) => setActivePickerSection(open ? 'personal' : null)}
@@ -1995,8 +2002,8 @@ export default function App() {
                       onChange={(e) => handleFormChange('i_rep_gender', e.target.value)}
                       className="w-full bg-black/40 border border-white/10 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 font-semibold cursor-pointer appearance-none"
                     >
-                      <option value="M" className="bg-[#121217] text-white">{currentLang === 'kr' ? '남성' : currentLang === 'en' ? 'Male' : 'Nam'}</option>
-                      <option value="F" className="bg-[#121217] text-white">{currentLang === 'kr' ? '여성' : currentLang === 'en' ? 'Female' : 'Nữ'}</option>
+                      <option value="M" className="bg-[#121217] text-white">{currentLang === 'kr' ? '남성' : currentLang === 'en' ? 'Male' : currentLang === 'ne' ? 'पुरुष' : 'Nam'}</option>
+                      <option value="F" className="bg-[#121217] text-white">{currentLang === 'kr' ? '여성' : currentLang === 'en' ? 'Female' : currentLang === 'ne' ? 'महिला' : 'Nữ'}</option>
                     </select>
                   </div>
 
@@ -2035,7 +2042,7 @@ export default function App() {
                         type="text" 
                         value={formData.i_new_cname}
                         onChange={(e) => handleFormChange('i_new_cname', e.target.value)}
-                        placeholder={currentLang === 'kr' ? '예: 지원ENG' : currentLang === 'en' ? 'e.g. Jiwon ENG' : 'Ví dụ: Jiwon ENG'}
+                        placeholder={currentLang === 'kr' ? '예: 지원ENG' : currentLang === 'en' ? 'e.g. Jiwon ENG' : currentLang === 'ne' ? 'जस्तै: Jiwon ENG' : 'Ví dụ: Jiwon ENG'}
                         className="w-full bg-black/40 border border-white/10 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 font-semibold"
                       />
                     </div>
@@ -2046,7 +2053,7 @@ export default function App() {
                         type="text" 
                         value={formData.i_new_cregno}
                         onChange={(e) => handleFormChange('i_new_cregno', formatBusinessNo(e.target.value))}
-                        placeholder={currentLang === 'kr' ? '예: XXX-XX-XXXXX' : currentLang === 'en' ? 'e.g. XXX-XX-XXXXX' : 'Ví dụ: XXX-XX-XXXXX'}
+                        placeholder={currentLang === 'kr' ? '예: XXX-XX-XXXXX' : currentLang === 'en' ? 'e.g. XXX-XX-XXXXX' : currentLang === 'ne' ? 'जस्तै: XXX-XX-XXXXX' : 'Ví dụ: XXX-XX-XXXXX'}
                         className="w-full bg-black/40 border border-white/10 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 font-mono font-bold"
                       />
                     </div>
@@ -2057,7 +2064,7 @@ export default function App() {
                         type="tel" 
                         value={formData.i_new_cphone}
                         onChange={(e) => handleFormChange('i_new_cphone', formatPhoneNumber(e.target.value))}
-                        placeholder={currentLang === 'kr' ? '예: XXX-XXX-XXXX' : currentLang === 'en' ? 'e.g. XXX-XXX-XXXX' : 'Ví dụ: XXX-XXX-XXXX'}
+                        placeholder={currentLang === 'kr' ? '예: XXX-XXX-XXXX' : currentLang === 'en' ? 'e.g. XXX-XXX-XXXX' : currentLang === 'ne' ? 'जस्तै: XXX-XXX-XXXX' : 'Ví dụ: XXX-XXX-XXXX'}
                         className="w-full bg-black/40 border border-white/10 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 font-mono"
                       />
                     </div>
@@ -2149,7 +2156,7 @@ export default function App() {
                           errorHighlights.has('i_income') ? 'error-highlight' : ''
                         }`}
                       />
-                      <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-extrabold text-white/40">{currentLang === 'kr' ? '만원' : currentLang === 'en' ? '10k KRW' : 'Vạn Won'}</span>
+                      <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-extrabold text-white/40">{currentLang === 'kr' ? '만원' : currentLang === 'en' ? '10k KRW' : currentLang === 'ne' ? '१० हजार वोन' : 'Vạn Won'}</span>
                     </div>
                   </div>
 
@@ -2323,6 +2330,8 @@ export default function App() {
                             ? `업로드 완료된 검증 서류 (${attachments.length}개)` 
                             : currentLang === 'en' 
                             ? `Uploaded Verification Docs (${attachments.length})` 
+                            : currentLang === 'ne'
+                            ? `अपलोड गरिएका प्रमाणीकरण कागजातहरू (${attachments.length})`
                             : `Tài liệu xác minh đã tải lên (${attachments.length})`}
                         </span>
                       </span>
@@ -2330,7 +2339,7 @@ export default function App() {
                         onClick={() => setAttachments([])}
                         className="text-[10px] text-rose-300 hover:text-rose-450 bg-rose-500/10 hover:bg-rose-500/20 px-2.5 py-1 rounded-md transition"
                       >
-                        {currentLang === 'kr' ? '전체 지우기' : currentLang === 'en' ? 'Clear All' : 'Xóa tất cả'}
+                        {currentLang === 'kr' ? '전체 지우기' : currentLang === 'en' ? 'Clear All' : currentLang === 'ne' ? 'सबै हटाउनुहोस्' : 'Xóa tất cả'}
                       </button>
                     </div>
                     
