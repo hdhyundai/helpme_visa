@@ -1150,15 +1150,15 @@ export default function App() {
         <img 
           src="/yard-background.png" 
           alt="Company Yard Background"
-          className="w-full h-full object-cover opacity-[0.15] scale-105 filter grayscale contrast-[1.1] mix-blend-luminosity animate-[pulse_15s_infinite]"
+          className="w-full h-full object-cover opacity-30 scale-105 filter brightness-75 animate-[pulse_15s_infinite]"
           onError={(e) => {
             (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1542152648-9366113b299e?auto=format&fit=crop&q=80&w=1920";
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#030305] via-[#030305]/90 to-[#030305]/60" />
-        <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at center, transparent 15%, #030305 85%)' }} />
-        <div className="absolute inset-0 grid-pattern opacity-50" />
-        <div className="absolute inset-0 scanline" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#030305] via-[#030305]/70 to-[#030305]/40" />
+        <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at center, transparent 30%, #030305 100%)' }} />
+        <div className="absolute inset-0 grid-pattern opacity-40" />
+        <div className="absolute inset-0 scanline opacity-50" />
       </div>
 
       {/* Dynamic Navigation Toolbar & Navbar */}
@@ -1278,13 +1278,13 @@ export default function App() {
                   <img 
                     src="/yard-background.png" 
                     alt="HD Hyundai Samho Shipyard"
-                    className="w-full h-full object-cover object-center opacity-[0.25] group-hover:scale-[1.03] transition-transform duration-[4s] select-none pointer-events-none filter grayscale contrast-125 mix-blend-luminosity"
+                    className="w-full h-full object-cover object-center opacity-40 group-hover:scale-[1.03] transition-transform duration-[4s] select-none pointer-events-none filter brightness-90 mix-blend-lighten"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1588523315714-d03541bdc6ce?auto=format&fit=crop&w=1200&q=80";
                     }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#030305] via-[#030305]/60 to-blue-900/20 mix-blend-overlay"></div>
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#030305]/50 to-[#030305]"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#030305] via-[#030305]/40 to-blue-900/30"></div>
+                  <div className="absolute inset-0 bg-gradient-to-b from-[#030305]/20 via-transparent to-[#030305]"></div>
                 </div>
 
                 <div className="relative z-10 px-4 py-8 sm:px-12 sm:py-16 text-center flex flex-col items-center">
