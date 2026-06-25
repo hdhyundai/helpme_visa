@@ -1145,15 +1145,17 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#030305] text-slate-300 flex flex-col font-sans select-none antialiased relative overflow-hidden">
-      {/* Cinematic Sci-fi High-Tech Background Vignette */}
-      <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
+      {/* Company Yard Background Vignette */}
+      <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden bg-[#030305]">
         <img 
-          src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1920" 
-          alt="Sleek High-Tech Digital Network"
-          className="w-full h-full object-cover opacity-[0.14] scale-105 filter blur-[2px] animate-[pulse_15s_infinite]"
-          referrerPolicy="no-referrer"
+          src="/yard-background.png" 
+          alt="Company Yard Background"
+          className="w-full h-full object-cover opacity-[0.15] scale-105 filter grayscale contrast-[1.1] mix-blend-luminosity animate-[pulse_15s_infinite]"
+          onError={(e) => {
+            (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1542152648-9366113b299e?auto=format&fit=crop&q=80&w=1920";
+          }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#030305] via-[#030305]/95 to-[#030305]/60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#030305] via-[#030305]/90 to-[#030305]/60" />
         <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at center, transparent 15%, #030305 85%)' }} />
         <div className="absolute inset-0 grid-pattern opacity-50" />
         <div className="absolute inset-0 scanline" />
@@ -1170,10 +1172,10 @@ export default function App() {
             >
               <Home className="w-4 h-4 sm:w-5 sm:h-5 text-slate-200" />
             </button>
-            <div className="flex items-center gap-1.5 text-left">
-              <FileSignature className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 shrink-0" />
+            <div className="flex items-center gap-2 text-left">
+              <img src="/hd-hyundai-samho-ci.png" alt="HD현대삼호" className="h-5 sm:h-6 object-contain" />
               <h1 className="text-sm sm:text-base font-extrabold text-slate-200 tracking-tight leading-none whitespace-nowrap">
-                HD현대삼호 비자지원
+                비자지원
               </h1>
             </div>
           </div>
@@ -1272,15 +1274,17 @@ export default function App() {
             >
               {/* Grand Shipyard Hero Corporate Banner */}
               <div className="relative overflow-hidden rounded-3xl border border-blue-500/20 shadow-[0_20px_50px_rgba(0,0,0,0.6)] bg-[#0c1020]/45 group cyber-bracket relative">
-                <div className="absolute inset-0 z-0">
+                <div className="absolute inset-0 z-0 bg-[#030305]">
                   <img 
-                    src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80" 
-                    alt="HD Hyundai Samho Futuristic Manufacturing"
-                    className="w-full h-full object-cover object-center opacity-25 group-hover:scale-[1.03] transition-transform duration-[4s] select-none pointer-events-none filter saturate-100 brightness-90 mix-blend-screen"
-                    referrerPolicy="no-referrer"
+                    src="/yard-background.png" 
+                    alt="HD Hyundai Samho Shipyard"
+                    className="w-full h-full object-cover object-center opacity-[0.25] group-hover:scale-[1.03] transition-transform duration-[4s] select-none pointer-events-none filter grayscale contrast-125 mix-blend-luminosity"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1588523315714-d03541bdc6ce?auto=format&fit=crop&w=1200&q=80";
+                    }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#030305] via-[#030305]/80 to-transparent"></div>
-                  <div className="absolute inset-0 bg-blue-900/10 mixture-soft-light pointer-events-none"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#030305] via-[#030305]/60 to-blue-900/20 mix-blend-overlay"></div>
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#030305]/50 to-[#030305]"></div>
                 </div>
 
                 <div className="relative z-10 px-4 py-8 sm:px-12 sm:py-16 text-center flex flex-col items-center">
